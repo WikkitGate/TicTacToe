@@ -12,7 +12,7 @@ public class TicTacToe{
 		this.player = true;
 		this.movesLeft = 9;
 		this.table = new int[3][3];
-		this.genTable();
+		//this.genTable();
 	}
 
 	//Sets up the table for new game
