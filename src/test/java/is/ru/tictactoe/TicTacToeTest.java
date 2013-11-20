@@ -15,7 +15,12 @@ public class TicTacToeTest{
 		//movesLeft
 		assertEquals("movesLeft should be set to 9", 9, game.movesLeft);
 
-		//table
+		//table rows
 		assertEquals("table should have 3 rows", 3, game.table.length);
+
+		//table columns
+		for(int row = 0; row < 3; row++){
+			assertEquals("table should have 3 columns", 3, game.table[row].length);
+		}
 	}
 }
