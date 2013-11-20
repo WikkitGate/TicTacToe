@@ -29,10 +29,12 @@ public class TicTacToeTest{
 	public void genTableTest(){
 		TicTacToe game = new TicTacToe();
 		game.genTable();
+		int counter = 1;
 
 		for(int row = 0; row < 3; row++){
 			for(int column = 0; column < 3; column++){
-				assertEquals("The table array should be filled with all -3", -3, game.table[row][column]);
+				assertEquals("The table array should be filled with all -3", counter, game.table[row][column]);
+				counter++;
 			}
 		}
 	}
@@ -41,7 +43,7 @@ public class TicTacToeTest{
 	public void setMarkerTest(){
 		game = new TicTacToe();
 
-		assertEquals("Player is initialized to true, so setMarker should return 1", 1, game.setMarker());
+		assertEquals("Player is initialized to true, so setMarker should return 1", -1, game.setMarker());
 		game.player = false;
 		assertEquals("Player is false, so setMarker should return 0", 0, game.setMarker());
 	}
@@ -50,7 +52,7 @@ public class TicTacToeTest{
 	public void makeMoveTest(){
 		game = new TicTacToe();
 
-		//Input must be 1-9, including 1 and 9
+		//Input must be from 1 to 9, including 9
 		assertEquals("There is no square 0", false, game.makeMove(0));		
 		assertEquals("There is no square 10", false, game.makeMove(10));
 		assertEquals("Square 1 is free", true, game.makeMove(1));
@@ -101,5 +103,22 @@ public class TicTacToeTest{
 			assertEquals(true, game.findWinner());
 			game.genTable();
 		}
+	}
+
+	@Test
+	public void swapPlayerTest(){
+		game = new TicTacToe();
+		game.swapPlayer();
+		assertEquals("Player is false", false, game.player);
+		game.swapPlayer();
+		assertEquals("Player is true", true, game.player);
+	}
+
+	@Test
+	public void playerSymbolTest(){
+		game = new TicTacToe();
+		assertEquals("Player X", 'X', game.playerSymbol());
+		game.swapPlayer();
+		assertEquals("Player O", 'O', game.playerSymbol());
 	}
 }

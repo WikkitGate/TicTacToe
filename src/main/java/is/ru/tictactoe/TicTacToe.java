@@ -17,15 +17,18 @@ public class TicTacToe{
 
 	//Sets up the table for new game
 	public void genTable(){
+		int counter = 1;
 		for(int row = 0; row < 3; row++){
-			for(int column = 0; column < 3; column++)
-				this.table[row][column] = -3;
+			for(int column = 0; column < 3; column++){
+				this.table[row][column] = counter;
+				counter++;
+			}
 		}
 	}
 
 	//Returns the int value player should insert based on the value of player
 	public int setMarker(){
-		if(player)	{ return 1; }
+		if(player)	{ return -1; }
 		else		{ return 0; }
 	}
 
@@ -39,7 +42,7 @@ public class TicTacToe{
 		for(int row = 0; row < 3; row++){
 			for(int column = 0; column < 3; column++){
 				if(counter == chosenSquare){
-					if(this.table[row][column] == -3){
+					if(this.table[row][column] == counter){
 						this.table[row][column] = marker;
 						return true;
 					}
@@ -51,5 +54,51 @@ public class TicTacToe{
 			}
 		}
 		return false;
+	}
+
+	//Return true if winner is found otherwise false
+	public boolean findWinner(){
+		//check rows for a winner
+		for(int index = 0; index < 3; index++){
+			if(this.table[index][0] == this.table[index][1] && this.table[index][0] == this.table[index][2]){
+				return true;
+			}
+			if(this.table[0][index] == this.table[1][index] && this.table[0][index] == this.table[2][index]){
+				return true;
+			}
+		}
+		if(this.table[0][0] == this.table[1][1] && this.table[0][0] == this.table[2][2]){
+			return true;
+		}
+		if(this.table[0][2] == this.table[1][1] && this.table[0][0] == this.table[2][0]){
+			return true;
+		}
+		return false;
+	}
+
+	//Swaps the value of this.player
+	public void swapPlayer(){
+		if(this.player)	{ player = false; }
+		else			{ player = true; }
+	}
+
+	//returns the players character
+	public char playerSymbol(){
+		if(this.player)	{ return 'X'; }
+		else			{ return 'O'; }
+	}
+
+	//Receives the chosen square from user
+	public int readInput(){
+		while(true){
+			try{
+				Scanner input = new Scanner(System.in);
+				System.out.println("Player " + this.playerSymbol() + ", make your move.");
+				return input.nextInt();
+			}
+			catch(Exception e){
+				System.out.println("Error, try again");
+			}
+		}
 	}
 }
