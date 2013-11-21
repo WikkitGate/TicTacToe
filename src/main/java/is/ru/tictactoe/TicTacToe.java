@@ -101,4 +101,43 @@ public class TicTacToe{
 			}
 		}
 	}
+
+	public void printTable(){
+		for(int row = 0; row < 3; row++){
+			for(int column = 0; column < 3; column++){
+				if(this.table[row][column] > 0){
+					System.out.print(this.table[row][column]);
+				}
+				else{
+					System.out.print(this.playerSymbol());
+				}
+			}
+			System.out.println();
+		}
+	}
+
+	public void playGame(){
+		while(movesLeft > 0){
+			this.printTable();
+
+			int chosenSquare = this.readInput();
+
+			if(this.makeMove(chosenSquare)){
+				if(this.findWinner()){
+					System.out.println("Player " + this.playerSymbol() + " wins!");
+					break;
+				}
+				movesLeft--;
+				this.swapPlayer();
+				System.out.println();
+			}
+			else{
+				System.out.println("Invalid move, try again!");
+			}
+		}
+
+		if(movesLeft < 1){
+			System.out.println("We have a tie!");
+		}
+	}
 }
