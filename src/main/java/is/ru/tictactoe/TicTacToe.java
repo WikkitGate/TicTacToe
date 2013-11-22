@@ -3,9 +3,9 @@ package is.ru.tictactoe;
 import java.util.Scanner;
 
 public class TicTacToe{
-	public boolean player;
-	public int[][] table;
-	public int movesLeft;
+	private boolean player;
+	private int[][] table;
+	private int movesLeft;
 
 	//Constructor
 	public TicTacToe(){
@@ -15,8 +15,28 @@ public class TicTacToe{
 		this.genTable();
 	}
 
+	public boolean getPlayer(){
+		return this.player;
+	}
+
+	public void setPlayer(boolean newValue){
+		this.player = newValue;
+	}
+
+	public int getMovesLeft(){
+		return this.movesLeft;
+	}
+
+	public void resetMovesLeft(){
+		this.movesLeft = 9;
+	}
+
+	public int[][] getTable(){
+		return this.table;
+	}
+
 	//Sets up the table for new game
-	public void genTable(){
+	protected void genTable(){
 		int counter = 1;
 		for(int row = 0; row < 3; row++){
 			for(int column = 0; column < 3; column++){
@@ -27,15 +47,15 @@ public class TicTacToe{
 	}
 
 	//Returns the int value player should insert based on the value of player
-	public int setMarker(){
+	protected int getMarker(){
 		if(player)	{ return -1; }
 		else		{ return 0; }
 	}
 
 	//Returns true if move was made, otherwise false
-	public boolean makeMove(int chosenSquare){
+	protected boolean makeMove(int chosenSquare){
 		int counter = 1;
-		int marker = this.setMarker();
+		int marker = this.getMarker();
 
 		if(chosenSquare < 1 || chosenSquare > 9){ return false; }
 
@@ -57,7 +77,7 @@ public class TicTacToe{
 	}
 
 	//Return true if winner is found otherwise false
-	public boolean findWinner(){
+	protected boolean findWinner(){
 		//check rows for a winner
 		for(int index = 0; index < 3; index++){
 			if(this.table[index][0] == this.table[index][1] && this.table[index][0] == this.table[index][2]){
@@ -77,19 +97,19 @@ public class TicTacToe{
 	}
 
 	//Swaps the value of this.player
-	public void swapPlayer(){
+	protected void swapPlayer(){
 		if(this.player)	{ player = false; }
 		else			{ player = true; }
 	}
 
 	//returns the players character
-	public char playerSymbol(){
+	protected char playerSymbol(){
 		if(this.player)	{ return 'X'; }
 		else			{ return 'O'; }
 	}
 
 	//Receives the chosen square from user
-	public int readInput(){
+	protected int readInput(){
 		while(true){
 			try{
 				Scanner input = new Scanner(System.in);
@@ -102,7 +122,7 @@ public class TicTacToe{
 		}
 	}
 
-	public void printTable(){
+	protected void printTable(){
 		for(int row = 0; row < 3; row++){
 			for(int column = 0; column < 3; column++){
 				if(this.table[row][column] > 0){
@@ -116,7 +136,7 @@ public class TicTacToe{
 		}
 	}
 
-	public void playGame(){
+	protected void playGame(){
 		while(movesLeft > 0){
 			this.printTable();
 

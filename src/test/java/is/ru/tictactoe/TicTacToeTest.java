@@ -11,41 +11,43 @@ public class TicTacToeTest{
 		game = new TicTacToe();
 
 		//player
-		assertEquals("player should be set to true and initialization", true, game.player);
+		assertEquals("player should be set to true and initialization", true, game.getPlayer());
 
 		//movesLeft
-		assertEquals("movesLeft should be set to 9", 9, game.movesLeft);
+		assertEquals("movesLeft should be set to 9", 9, game.getMovesLeft());
 
 		//table rows
-		assertEquals("table should have 3 rows", 3, game.table.length);
+		int[][] gameTable = game.getTable();
+		assertEquals("table should have 3 rows", 3, gameTable.length);
 
 		//table columns
 		for(int row = 0; row < 3; row++){
-			assertEquals("table should have 3 columns", 3, game.table[row].length);
+			assertEquals("table should have 3 columns", 3, gameTable[row].length);
 		}
 	}
 
 	@Test
 	public void genTableTest(){
 		TicTacToe game = new TicTacToe();
-		game.genTable();
+		//genTable is run automatically in the constructor
+		int[][] gameTable = game.getTable();
 		int counter = 1;
 
 		for(int row = 0; row < 3; row++){
 			for(int column = 0; column < 3; column++){
-				assertEquals("The table array should be filled with all -3", counter, game.table[row][column]);
+				assertEquals("The table array should be filled with all -3", counter, gameTable[row][column]);
 				counter++;
 			}
 		}
 	}
 
 	@Test
-	public void setMarkerTest(){
+	public void getMarkerTest(){
 		game = new TicTacToe();
 
-		assertEquals("Player is initialized to true, so setMarker should return 1", -1, game.setMarker());
-		game.player = false;
-		assertEquals("Player is false, so setMarker should return 0", 0, game.setMarker());
+		assertEquals("Player is initialized to true, so setMarker should return -1", -1, game.getMarker());
+		game.setPlayer(false);
+		assertEquals("Player is false, so setMarker should return 0", 0, game.getMarker());
 	}
 
 	@Test
@@ -109,9 +111,9 @@ public class TicTacToeTest{
 	public void swapPlayerTest(){
 		game = new TicTacToe();
 		game.swapPlayer();
-		assertEquals("Player is false", false, game.player);
+		assertEquals("Player is false", false, game.getPlayer());
 		game.swapPlayer();
-		assertEquals("Player is true", true, game.player);
+		assertEquals("Player is true", true, game.getPlayer());
 	}
 
 	@Test
