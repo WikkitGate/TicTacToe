@@ -90,7 +90,7 @@ public class TicTacToe{
 		if(this.table[0][0] == this.table[1][1] && this.table[0][0] == this.table[2][2]){
 			return true;
 		}
-		if(this.table[0][2] == this.table[1][1] && this.table[0][0] == this.table[2][0]){
+		if(this.table[0][2] == this.table[1][1] && this.table[0][2] == this.table[2][0]){
 			return true;
 		}
 		return false;
