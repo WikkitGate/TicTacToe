@@ -5,7 +5,7 @@ public class Player{
 	private int wins;
 	private int losses;
 	private float elo;
-	private int playerInt;
+	private boolean playerValue;
 
 	//Constructor takes in name and sets Wins, losses and elo to 0
 	public Player(){
