@@ -140,7 +140,13 @@ public class TicTacToe{
 
 	protected void printTable(){
 		for(int row = 0; row < 3; row++){
+			if(row == 1 || row == 2){
+				System.out.println("-----");
+			}
 			for(int column = 0; column < 3; column++){
+				if(column == 1 || column == 2){
+					System.out.println("|");
+				}
 				System.out.print(tableSymbol(this.getTable()[row][column]));
 			}
 			System.out.println();
@@ -152,7 +158,9 @@ public class TicTacToe{
 			this.printTable();
 
 			int chosenSquare = this.readInput();
-
+			if(chosenSquare == 1337){
+				System.out.println("Player " + this.playerSymbol() + " is too 1337!");
+				break;
 			if(this.makeMove(chosenSquare)){
 				if(this.findWinner()){
 					System.out.println("Player " + this.playerSymbol() + " wins!");
