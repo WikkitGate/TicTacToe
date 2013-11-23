@@ -29,9 +29,9 @@ public class TicTacToe{
 		return this.movesLeft;
 	}
 
-	//Resets this.movesLeft for new game
-	protected void resetMovesLeft(){
-		this.movesLeft = 9;
+	//Sets the value of this.movesLeft to value
+	protected void setMovesLeft(int value){
+		this.movesLeft = value;
 	}
 
 	//Returns this.table for viewing
@@ -40,7 +40,7 @@ public class TicTacToe{
 	}
 
 	//Set the value of this.table[row][column] to value
-	public void setTable(int row, int column, int value){
+	public void setSquare(int row, int column, int value){
 		this.table[row][column] = value;
 	}
 
@@ -74,7 +74,7 @@ public class TicTacToe{
 		int counter = 1;
 		for(int row = 0; row < 3; row++){
 			for(int column = 0; column < 3; column++){
-				this.setTable(row, column, counter);
+				this.setSquare(row, column, counter);
 				counter++;
 			}
 		}
@@ -91,7 +91,7 @@ public class TicTacToe{
 			for(int column = 0; column < 3; column++){
 				if(counter == chosenSquare){
 					if(this.getTable()[row][column] == counter){
-						this.setTable(row, column, marker);
+						this.setSquare(row, column, marker);
 						return true;
 					}
 					else{

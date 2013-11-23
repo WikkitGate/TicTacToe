@@ -16,29 +16,31 @@ public class TicTacToeTest{
 		//movesLeft
 		assertEquals("movesLeft should be set to 9", 9, game.getMovesLeft());
 
-		//table rows
-		int[][] gameTable = game.getTable();
-		assertEquals("table should have 3 rows", 3, gameTable.length);
+		//number of table rows should be 3
+		//int[][] gameTable = game.getTable();
+		assertEquals("table should have 3 rows", 3, game.getTable().length);
 
-		//table columns
+		//table number of columns should be 3
 		for(int row = 0; row < 3; row++){
-			assertEquals("table should have 3 columns", 3, gameTable[row].length);
+			assertEquals("table should have 3 columns", 3, game.getTable()[row].length);
 		}
 	}
 
 	@Test
-	public void genTableTest(){
-		TicTacToe game = new TicTacToe();
-		//genTable is run automatically in the constructor
-		int[][] gameTable = game.getTable();
-		int counter = 1;
+	public void setPlayerTest(){
+		game = new TicTacToe();
+		assertEquals("Player should be true at initialization", true, game.getPlayer());
+		
+		game.setPlayer(false);
+		assertEquals("We have set player to false", false, game.getPlayer());
 
-		for(int row = 0; row < 3; row++){
-			for(int column = 0; column < 3; column++){
-				assertEquals("The table array should be filled with all -3", counter, gameTable[row][column]);
-				counter++;
-			}
-		}
+		game.setPlayer(true);
+		assertEquals("We have set player to true", true, game.getPlayer());
+	}
+
+	@Test
+	public void setSquareTest(){
+		
 	}
 
 	@Test
@@ -48,6 +50,43 @@ public class TicTacToeTest{
 		assertEquals("Player is initialized to true, so setMarker should return -1", -1, game.getMarker());
 		game.setPlayer(false);
 		assertEquals("Player is false, so setMarker should return 0", 0, game.getMarker());
+	}
+
+	@Test
+	public void swapPlayerTest(){
+		game = new TicTacToe();
+		game.swapPlayer();
+		assertEquals("Player is false", false, game.getPlayer());
+		game.swapPlayer();
+		assertEquals("Player is true", true, game.getPlayer());
+	}
+
+	@Test
+	public void playerSymbolTest(){
+		game = new TicTacToe();
+		assertEquals("Player X", 'X', game.playerSymbol());
+		game.swapPlayer();
+		assertEquals("Player O", 'O', game.playerSymbol());
+	}
+
+	@Test
+	public void tableSymbolTest(){
+		
+	}
+
+	@Test
+	public void genTableTest(){
+		game = new TicTacToe();
+		//genTable is run automatically in the constructor
+		int[][] gameTable = game.getTable();
+		int counter = 1;
+
+		for(int row = 0; row < 3; row++){
+			for(int column = 0; column < 3; column++){
+				assertEquals("This square should have value " + counter, counter, gameTable[row][column]);
+				counter++;
+			}
+		}
 	}
 
 	@Test
@@ -108,19 +147,9 @@ public class TicTacToeTest{
 	}
 
 	@Test
-	public void swapPlayerTest(){
+	public void tableInputTest(){
 		game = new TicTacToe();
-		game.swapPlayer();
-		assertEquals("Player is false", false, game.getPlayer());
-		game.swapPlayer();
-		assertEquals("Player is true", true, game.getPlayer());
-	}
 
-	@Test
-	public void playerSymbolTest(){
-		game = new TicTacToe();
-		assertEquals("Player X", 'X', game.playerSymbol());
-		game.swapPlayer();
-		assertEquals("Player O", 'O', game.playerSymbol());
+
 	}
 }
