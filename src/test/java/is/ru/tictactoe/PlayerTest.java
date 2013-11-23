@@ -3,7 +3,7 @@ package is.ru.tictactoe;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
-public class PlayerTest.java{
+public class PlayerTest{
 
 	@Test
 	public void constructorTest(){
@@ -11,7 +11,7 @@ public class PlayerTest.java{
 	}
 
 	@Test
-	public int testElo(){
+	public void testElo(){
 		
 	}
 }
