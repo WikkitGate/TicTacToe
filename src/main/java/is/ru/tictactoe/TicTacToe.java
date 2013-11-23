@@ -138,6 +138,7 @@ public class TicTacToe{
 		}
 	}
 
+	//Prints this.table to screen so player can read
 	protected void printTable(){
 		for(int row = 0; row < 3; row++){
 			if(row == 1 || row == 2){
@@ -153,6 +154,7 @@ public class TicTacToe{
 		}
 	}
 
+	//handles the basic gameplay of tictactoe
 	protected void playGame(){
 		while(movesLeft > 0){
 			this.printTable();
