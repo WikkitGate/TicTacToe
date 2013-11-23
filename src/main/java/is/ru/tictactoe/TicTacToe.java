@@ -15,10 +15,12 @@ public class TicTacToe{
 		this.genTable();
 	}
 
+	//Returns this.player for your viewing pleasure
 	public boolean getPlayer(){
 		return this.player;
 	}
 
+	//Gives this.player a new value
 	protected void setPlayer(boolean newValue){
 		this.player = newValue;
 	}
@@ -27,12 +29,44 @@ public class TicTacToe{
 		return this.movesLeft;
 	}
 
+	//Resets this.movesLeft for new game
 	protected void resetMovesLeft(){
 		this.movesLeft = 9;
 	}
 
+	//Returns this.table for viewing
 	public int[][] getTable(){
 		return this.table;
+	}
+
+	//Set the value of this.table[row][column] to value
+	public void setTable(int row, int column, int value){
+		this.table[row][column] = value;
+	}
+
+	//Returns the int value player should insert based on the value of player
+	protected int getMarker(){
+		if(this.getPlayer())	{ return -1; }
+		else					{ return 0; }
+	}
+
+	//Swaps the value of this.player
+	protected void swapPlayer(){
+		if(this.getPlayer())	{ this.setPlayer(false); }
+		else					{ this.setPlayer(true); }
+	}
+
+	//returns the players character based on this.player
+	protected char playerSymbol(){
+		if(this.getPlayer())	{ return 'X'; }
+		else					{ return 'O'; }
+	}
+
+	//returns the players character based on input
+	protected String tableSymbol(int input){
+		if(input == -1)			{ return "X"; }
+		else if(input == 0)		{ return "O"; }
+		else					{ return Integer.toString(input); }
 	}
 
 	//Sets up the table for new game
@@ -40,16 +74,10 @@ public class TicTacToe{
 		int counter = 1;
 		for(int row = 0; row < 3; row++){
 			for(int column = 0; column < 3; column++){
-				this.table[row][column] = counter;
+				this.setTable(row, column, counter);
 				counter++;
 			}
 		}
-	}
-
-	//Returns the int value player should insert based on the value of player
-	protected int getMarker(){
-		if(player)	{ return -1; }
-		else		{ return 0; }
 	}
 
 	//Returns true if move was made, otherwise false
@@ -62,8 +90,8 @@ public class TicTacToe{
 		for(int row = 0; row < 3; row++){
 			for(int column = 0; column < 3; column++){
 				if(counter == chosenSquare){
-					if(this.table[row][column] == counter){
-						this.table[row][column] = marker;
+					if(this.getTable()[row][column] == counter){
+						this.setTable(row, column, marker);
 						return true;
 					}
 					else{
@@ -80,39 +108,20 @@ public class TicTacToe{
 	protected boolean findWinner(){
 		//check rows for a winner
 		for(int index = 0; index < 3; index++){
-			if(this.table[index][0] == this.table[index][1] && this.table[index][0] == this.table[index][2]){
+			if(this.getTable()[index][0] == this.getTable()[index][1] && this.getTable()[index][0] == this.getTable()[index][2]){
 				return true;
 			}
-			if(this.table[0][index] == this.table[1][index] && this.table[0][index] == this.table[2][index]){
+			if(this.getTable()[0][index] == this.getTable()[1][index] && this.getTable()[0][index] == this.getTable()[2][index]){
 				return true;
 			}
 		}
-		if(this.table[0][0] == this.table[1][1] && this.table[0][0] == this.table[2][2]){
+		if(this.getTable()[0][0] == this.getTable()[1][1] && this.getTable()[0][0] == this.getTable()[2][2]){
 			return true;
 		}
-		if(this.table[0][2] == this.table[1][1] && this.table[0][2] == this.table[2][0]){
+		if(this.getTable()[0][2] == this.getTable()[1][1] && this.getTable()[0][2] == this.getTable()[2][0]){
 			return true;
 		}
 		return false;
-	}
-
-	//Swaps the value of this.player
-	protected void swapPlayer(){
-		if(this.player)	{ player = false; }
-		else			{ player = true; }
-	}
-
-	//returns the players character based on this.player
-	protected char playerSymbol(){
-		if(this.player)	{ return 'X'; }
-		else			{ return 'O'; }
-	}
-
-	//returns the players character based on input
-	protected String tableSymbol(int input){
-		if(input == -1)		{ return "X"; }
-		else if(input == 0)	{ return "O"; }
-		else				{ return Integer.toString(input); }
 	}
 
 	//Receives the chosen square from user
