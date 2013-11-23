@@ -3,6 +3,7 @@ package is.ru.tictactoe;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
+
 public class PlayerTest
 {
 
@@ -18,7 +19,7 @@ public class PlayerTest{
 	
 	//	setName() and getName() tested together
 	@Test
-	public void nameTest(){
+	public void setNameTest(){
 		assertEquals("This should return an empty string, since the name has not been set yet", "", player.getName());
 		player.setName("Einar")
 		assertEquals("This should return the name Einar", "Einar", player.getName());
@@ -89,12 +90,16 @@ public class PlayerTest{
 	}
 
 	@Test
-<<<<<<< HEAD
+
 	public int testElo(){
 	*/
 		
 	@Test
 	public void testElo(){
 	
+
+	public void testElo(){
+
 	}
+
 }
