@@ -3,12 +3,10 @@ package is.ru.tictactoe;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
-<<<<<<< HEAD
 public class PlayerTest
 {
-=======
+
 public class PlayerTest{
->>>>>>> 5a499b56219662e6d9cc779088369858ba72565f
 
 	@Test
 	public void constructorTest(){
@@ -95,9 +93,8 @@ public class PlayerTest{
 	public int testElo(){
 	*/
 		
-=======
+	@Test
 	public void testElo(){
 	
->>>>>>> 5a499b56219662e6d9cc779088369858ba72565f
 	}
 }
