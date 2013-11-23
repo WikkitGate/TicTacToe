@@ -7,7 +7,7 @@ public class Player{
 	private float elo;
 
 	//Constructor takes in name and sets Wins, losses and elo to 0
-	public Player(name){
+	public Player(){
 		
 	}
 
@@ -52,7 +52,7 @@ public class Player{
 	}
 
 	//Calculates the Elo
-	public calculateElo(){
+	public void calculateElo(){
 
 	}
 }
