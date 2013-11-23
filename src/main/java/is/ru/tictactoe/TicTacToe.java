@@ -129,7 +129,7 @@ public class TicTacToe{
 		while(true){
 			try{
 				Scanner input = new Scanner(System.in);
-				System.out.println("Player " + this.playerSymbol() + ", make your move.");
+				System.out.println("Player " + this.playerSymbol() + ", choose a square or enter 1337 to quit.");
 				return input.nextInt();
 			}
 			catch(Exception e){
@@ -161,7 +161,7 @@ public class TicTacToe{
 
 			int chosenSquare = this.readInput();
 			if(chosenSquare == 1337){
-				System.out.println("Player " + this.playerSymbol() + " is too 1337!");
+				System.out.println("Player " + this.playerSymbol() + " ended the game!");
 				break;
 			}
 			if(this.makeMove(chosenSquare)){
