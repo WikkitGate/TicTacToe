@@ -40,10 +40,20 @@ public class TicTacToeTest{
 
 	@Test
 	public void setSquareTest(){
-		
+		game = new TicTacToe();
+		game.setSquare(1, 1, -1);
+		assertEquals("This square should be marked as X", -1, game.getTable()[1][1]);
+
+		game.setSquare(2, 0, 0);
+		assertEquals("This square should be marked as X", -1, game.getTable()[1][1]);
+
+		game.setSquare(0, 1, 2);
+		assertEquals("This square should return the number 2", 2, game.getTable()[0][1]);
+
 	}
 
 	@Test
+	
 	public void getMarkerTest(){
 		game = new TicTacToe();
 
@@ -71,7 +81,21 @@ public class TicTacToeTest{
 
 	@Test
 	public void tableSymbolTest(){
+		game = new TicTacToe();
+		assertEquals("Square 1", "1", game.tableSymbol(game.getTable()[0][0]));
+
+		assertEquals("Square 3", "3", game.tableSymbol(game.getTable()[0][2]));
+
+		assertEquals("Square 1", "9", game.tableSymbol(game.getTable()[2][2]));
+
+		game.setSquare(0, 0, -1);
+		assertEquals("Square should is marked X", "X", game.tableSymbol(game.getTable()[0][0]));
 		
+		game.setSquare(1, 1, 0);
+		assertEquals("Square should is marked O", "O", game.tableSymbol(game.getTable()[1][1]));
+
+		game.setSquare(0, 0, 2);
+		assertEquals("The number 2 should be returned, although it's an error.", "2", game.tableSymbol(game.getTable()[0][0]));
 	}
 
 	@Test
@@ -144,12 +168,5 @@ public class TicTacToeTest{
 			assertEquals(true, game.findWinner());
 			game.genTable();
 		}
-	}
-
-	@Test
-	public void tableInputTest(){
-		game = new TicTacToe();
-
-
 	}
 }
