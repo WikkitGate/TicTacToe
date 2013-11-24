@@ -3,8 +3,6 @@ package is.ru.tictactoe;
 public class Player{
 	private String name;
 	private int wins;
-	private int losses;
-	private float elo;
 	private boolean playerValue;
 
 	//Constructor takes in name and sets Wins, losses and elo to 0
@@ -14,46 +12,29 @@ public class Player{
 
 	//returns the name of the current Player
 	public String getName(){
-		return "";
+		return this.name;
 	}
 
 	//Change the Name
-	public void setName(){
-
+	public void setName(String name){
+		this.name = name;
 	}
 
 	//returns the number of wins won by the current player
 	public int getWins(){
-		return 0;
+		return this.wins;
 	}
 
 	//Change the wins
-	public void setWins(){
-
+	public void setWins(int newWins){
+		this.wins = newWins;
+	}
+		
+	public boolean getPlayerValue(){
+		return this.playerValue;
 	}
 
-	//get the number of losses
-	public int getLosses(){
-		return 0;
-	}
-
-	//change the Losses
-	public void setLosses(){
-
-	}
-
-	//get the Elo
-	public float getElo(){
-		return 0;
-	}
-
-	//change the Elo
-	public void setElo(){
-
-	}
-
-	//Calculates the Elo
-	public void calculateElo(){
-
+	public void setPlayerValue(boolean newValue){
+		this.playerValue = newValue;
 	}
 }
