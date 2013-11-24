@@ -237,7 +237,8 @@ public class TicTacToe{
 				ans = answer.charAt(0);				
 
 				if(ans != 'y') wantToPlay = false;
-			}
+
+			}	
 		}
 		catch(Exception e){
 			System.out.println(e.getMessage());
