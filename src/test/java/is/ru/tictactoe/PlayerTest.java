@@ -3,6 +3,10 @@ package is.ru.tictactoe;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
+
+public class PlayerTest
+{
+
 public class PlayerTest{
 
 	@Test
@@ -86,7 +90,16 @@ public class PlayerTest{
 	}
 
 	@Test
-	public void testElo(){
-	}
+
+	public int testElo(){
 	*/
+		
+	@Test
+	public void testElo(){
+	
+
+	public void testElo(){
+
+	}
+
 }
