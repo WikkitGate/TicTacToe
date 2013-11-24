@@ -3,26 +3,44 @@ package is.ru.tictactoe;
 import java.util.Scanner;
 
 public class TicTacToe{
-	private boolean player;
+	private Player[] players;
+	private int currentPlayer;
 	private int[][] table;
 	private int movesLeft;
 
 	//Constructor
 	public TicTacToe(){
-		this.player = true;
+		this.players = new Player[2];
+		this.currentPlayer = 1;
 		this.movesLeft = 9;
 		this.table = new int[3][3];
 		this.genTable();
 	}
 
 	//Returns this.player for your viewing pleasure
-	public boolean getPlayer(){
-		return this.player;
+	public Player[] getPlayers(){
+		return this.players;
 	}
 
-	//Gives this.player a new value
-	protected void setPlayer(boolean newValue){
-		this.player = newValue;
+	//Gives this.players new values
+	protected void setPlayers(){
+		Player playerOne = new Player();
+		Player playerTwo = new Player();
+
+		System.out.println("Player X enter your name: ");
+		playerOne.readName();
+		System.out.print("Player O enter your name: ");
+		playerTwo.readName();
+		this.getPlayers()[0] = playerTwo;
+		this.getPlayers()[1] = playerOne;
+	}
+
+	protected int getCurrentPlayer(){
+		return this.currentPlayer;
+	}
+
+	protected void setCurrentPlayer(int newPlayer){
+		if(newPlayer == 0 || newPlayer == 1){ this.currentPlayer = newPlayer; }
 	}
 
 	public int getMovesLeft(){
@@ -30,8 +48,8 @@ public class TicTacToe{
 	}
 
 	//Sets the value of this.movesLeft to value
-	protected void setMovesLeft(int value){
-		this.movesLeft = value;
+	protected void resetMovesLeft(){
+		this.movesLeft = 9;
 	}
 
 	//Returns this.table for viewing
@@ -41,28 +59,28 @@ public class TicTacToe{
 
 	//Set the value of this.table[row][column] to value
 	public void setSquare(int row, int column, int value){
-		this.table[row][column] = value;
+		this.getTable()[row][column] = value;
 	}
 
 	//Returns the int value player should insert based on the value of player
 	protected int getMarker(){
-		if(this.getPlayer())	{ return -1; }
-		else					{ return 0; }
+		if(this.getCurrentPlayer() == 1)	{ return -1; }
+		else								{ return 0; }
 	}
 
 	//Swaps the value of this.player
 	protected void swapPlayer(){
-		if(this.getPlayer())	{ this.setPlayer(false); }
-		else					{ this.setPlayer(true); }
+		if(this.getCurrentPlayer() == 1)	{ this.setCurrentPlayer(0); }
+		else								{ this.setCurrentPlayer(1); }
 	}
 
 	//returns the players character based on this.player
 	protected char playerSymbol(){
-		if(this.getPlayer())	{ return 'X'; }
-		else					{ return 'O'; }
+		if(this.getCurrentPlayer() == 1)	{ return 'X'; }
+		else								{ return 'O'; }
 	}
 
-	//returns the players character based on input
+	//returns the table character based on input
 	protected String tableSymbol(int input){
 		if(input == -1)			{ return "X"; }
 		else if(input == 0)		{ return "O"; }
@@ -115,12 +133,8 @@ public class TicTacToe{
 				return true;
 			}
 		}
-		if(this.getTable()[0][0] == this.getTable()[1][1] && this.getTable()[0][0] == this.getTable()[2][2]){
-			return true;
-		}
-		if(this.getTable()[0][2] == this.getTable()[1][1] && this.getTable()[0][2] == this.getTable()[2][0]){
-			return true;
-		}
+		if(this.getTable()[0][0] == this.getTable()[1][1] && this.getTable()[0][0] == this.getTable()[2][2]){ return true; }
+		if(this.getTable()[0][2] == this.getTable()[1][1] && this.getTable()[0][2] == this.getTable()[2][0]){ return true; }
 		return false;
 	}
 
@@ -129,7 +143,8 @@ public class TicTacToe{
 		while(true){
 			try{
 				Scanner input = new Scanner(System.in);
-				System.out.println("Player " + this.playerSymbol() + ", choose a square or enter 1337 to quit.");
+				System.out.println();
+				System.out.println(this.getPlayers()[this.getCurrentPlayer()].getName() + ", choose a square or enter 1337 to quit.");
 				return input.nextInt();
 			}
 			catch(Exception e){
@@ -154,19 +169,30 @@ public class TicTacToe{
 		}
 	}
 
+	protected void printStatus(){
+		System.out.println();
+		for(int i = 1; i >= 0; i--){
+			System.out.println(this.getPlayers()[i].getName() + " has " + this.getPlayers()[i].getVictories() + " victories");
+		}
+		System.out.println();
+	}
+
 	//handles the basic gameplay of tictactoe
 	protected void playGame(){
+		this.setPlayers();
+
 		while(movesLeft > 0){
 			this.printTable();
 
 			int chosenSquare = this.readInput();
 			if(chosenSquare == 1337){
-				System.out.println("Player " + this.playerSymbol() + " ended the game!");
+				System.out.println(this.getPlayers()[this.getCurrentPlayer()].getName() + " ended the game!");
 				break;
 			}
 			if(this.makeMove(chosenSquare)){
 				if(this.findWinner()){
-					System.out.println("Player " + this.playerSymbol() + " wins!");
+					System.out.println(this.getPlayers()[this.getCurrentPlayer()].getName() + " wins!");
+					this.getPlayers()[this.getCurrentPlayer()].victory();
 					this.printTable();
 					break;
 				}
@@ -182,10 +208,30 @@ public class TicTacToe{
 		if(movesLeft < 1){
 			System.out.println("We have a tie!");
 		}
+
+		this.printStatus();
 	}
 
 	public static void main(String[] args){
 		TicTacToe game = new TicTacToe();
-		game.playGame();
+		boolean wantToPlay = true;
+
+		while(wantToPlay){
+			game.playGame();
+
+			System.out.println("Want to play again?(y for yes)");
+
+			Scanner in = new Scanner(System.in);
+			try{
+				String answer = new String();
+				answer = in.next();
+				if(answer != "y"){
+					wantToPlay = false;
+				}
+			}
+			catch(Exception e){
+				System.out.println(e.getMessage());
+			}
+		}
 	}
 }

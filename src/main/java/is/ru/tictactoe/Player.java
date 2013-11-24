@@ -1,15 +1,14 @@
 package is.ru.tictactoe;
 
+import java.util.Scanner;
+
 public class Player{
 	private String name;
-	private int wins;
-	private boolean playerValue;
+	private int victories;
 
 	//Constructor takes in name and sets Wins, losses and elo to 0
-	public Player(String name, boolean value){
-		this.setName(name);
-		this.setWins(0);
-		this.setPlayerValue(value);
+	public Player(){
+		this.setVictories(0);
 	}
 
 	//returns the name of the current Player
@@ -17,26 +16,36 @@ public class Player{
 		return this.name;
 	}
 
-	//Change the Name
 	public void setName(String name){
 		this.name = name;
 	}
 
+	//Read the Name from terminal
+	public void readName(){
+		try{
+			String name = new String();
+			Scanner input = new Scanner(System.in);
+			if(input.hasNext()){
+				name = input.nextLine();
+			}
+			this.setName(name);
+		}
+		catch(Exception e){
+			System.out.println(e.getMessage());
+		}
+	}
+
 	//returns the number of wins won by the current player
-	public int getWins(){
-		return this.wins;
+	public int getVictories(){
+		return this.victories;
+	}
+
+	public void setVictories(int value){
+		this.victories = value;
 	}
 
 	//Change the wins
-	public void setWins(int newWins){
-		this.wins = newWins;
-	}
-
-	public boolean getPlayerValue(){
-		return this.playerValue;
-	}
-
-	public void setPlayerValue(boolean newValue){
-		this.playerValue = newValue;
+	public void victory(){
+		this.victories += 1;
 	}
 }

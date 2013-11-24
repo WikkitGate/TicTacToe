@@ -10,8 +10,11 @@ public class TicTacToeTest{
 	public void constructorTest(){
 		game = new TicTacToe();
 
-		//player
-		assertEquals("player should be set to true and initialization", true, game.getPlayer());
+		//players
+		assertEquals("players array should be of length 2 at initialization", 2, game.getPlayers().length);
+
+		//currentPlayer
+		assertEquals("currentPlayer should be initialized to 1", 1, game.getCurrentPlayer());
 
 		//movesLeft
 		assertEquals("movesLeft should be set to 9", 9, game.getMovesLeft());
@@ -27,15 +30,15 @@ public class TicTacToeTest{
 	}
 
 	@Test
-	public void setPlayerTest(){
+	public void setCurrentPlayerTest(){
 		game = new TicTacToe();
-		assertEquals("Player should be true at initialization", true, game.getPlayer());
-		
-		game.setPlayer(false);
-		assertEquals("We have set player to false", false, game.getPlayer());
 
-		game.setPlayer(true);
-		assertEquals("We have set player to true", true, game.getPlayer());
+		game.setCurrentPlayer(2);
+		assertEquals("currentPlayer should still be 1", 1, game.getCurrentPlayer());
+		game.setCurrentPlayer(0);
+		assertEquals("currentPlayer should be 0", 0, game.getCurrentPlayer());
+		game.setCurrentPlayer(1);
+		assertEquals("currentPlayer should be 1 again", 1, game.getCurrentPlayer());
 	}
 
 	@Test
@@ -52,23 +55,22 @@ public class TicTacToeTest{
 
 	}
 
-	@Test
-	
+	@Test	
 	public void getMarkerTest(){
 		game = new TicTacToe();
 
-		assertEquals("Player is initialized to true, so setMarker should return -1", -1, game.getMarker());
-		game.setPlayer(false);
-		assertEquals("Player is false, so setMarker should return 0", 0, game.getMarker());
+		assertEquals("currentPlayer is initialized to 1, so getMarker should return -1", -1, game.getMarker());
+		game.setCurrentPlayer(0);
+		assertEquals("currentPlayer is 0, so getMarker should return 0", 0, game.getMarker());
 	}
 
 	@Test
 	public void swapPlayerTest(){
 		game = new TicTacToe();
 		game.swapPlayer();
-		assertEquals("Player is false", false, game.getPlayer());
+		assertEquals("currentPlayer is 0", 0, game.getCurrentPlayer());
 		game.swapPlayer();
-		assertEquals("Player is true", true, game.getPlayer());
+		assertEquals("currentPlayer is 1 again", 1, game.getCurrentPlayer());
 	}
 
 	@Test
@@ -82,20 +84,14 @@ public class TicTacToeTest{
 	@Test
 	public void tableSymbolTest(){
 		game = new TicTacToe();
-		assertEquals("Square 1", "1", game.tableSymbol(game.getTable()[0][0]));
+		//If the integer input is not -1 or 0, it should be returned as string
+		for(int i = 1; i < 10; i++){
+			assertEquals("Square " + Integer.toString(i), Integer.toString(i), game.tableSymbol(i));
+		}
 
-		assertEquals("Square 3", "3", game.tableSymbol(game.getTable()[0][2]));
-
-		assertEquals("Square 1", "9", game.tableSymbol(game.getTable()[2][2]));
-
-		game.setSquare(0, 0, -1);
-		assertEquals("Square should is marked X", "X", game.tableSymbol(game.getTable()[0][0]));
+		assertEquals("-1 should return X", "X", game.tableSymbol(-1));
 		
-		game.setSquare(1, 1, 0);
-		assertEquals("Square should is marked O", "O", game.tableSymbol(game.getTable()[1][1]));
-
-		game.setSquare(0, 0, 2);
-		assertEquals("The number 2 should be returned, although it's an error.", "2", game.tableSymbol(game.getTable()[0][0]));
+		assertEquals("0 should return O", "O", game.tableSymbol(0));
 	}
 
 	@Test
