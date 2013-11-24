@@ -27,7 +27,7 @@ public class TicTacToe{
 		Player playerOne = new Player();
 		Player playerTwo = new Player();
 
-		System.out.println("Player X enter your name: ");
+		System.out.print("Player X enter your name: ");
 		playerOne.readName();
 		System.out.print("Player O enter your name: ");
 		playerTwo.readName();
@@ -222,24 +222,25 @@ public class TicTacToe{
 	public static void main(String[] args){
 		TicTacToe game = new TicTacToe();
 		game.setPlayers();
-		//boolean wantToPlay = true;
+		boolean wantToPlay = true;
+		String answer = new String();
+		Scanner in = new Scanner(System.in);
+		char ans;
 
-		while(true){
-			game.playGame();
-
-			System.out.println("Want to play again?(y for yes)");
-
-			Scanner in = new Scanner(System.in);
-			try{
-				String answer = new String();
+		try{
+	
+			while(wantToPlay){
+		
+				game.playGame();
+				System.out.println("Want to play again?(y for yes)");
 				answer = in.next();
-				/*if(answer != "y "){
-					wantToPlay = false;
-				}*/
+				ans = answer.charAt(0);				
+
+				if(ans != 'y') wantToPlay = false;
 			}
-			catch(Exception e){
-				System.out.println(e.getMessage());
-			}
+		}
+		catch(Exception e){
+			System.out.println(e.getMessage());
 		}
 	}
 }
