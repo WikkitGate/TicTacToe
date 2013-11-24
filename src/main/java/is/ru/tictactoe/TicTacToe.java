@@ -47,9 +47,13 @@ public class TicTacToe{
 		return this.movesLeft;
 	}
 
+	public void setMovesLeft(int value){
+		this.movesLeft = value;
+	}
+
 	//Sets the value of this.movesLeft to value
 	protected void resetMovesLeft(){
-		this.movesLeft = 9;
+		this.setMovesLeft(9);
 	}
 
 	protected void resetTable(){
@@ -201,7 +205,7 @@ public class TicTacToe{
 					this.printTable();
 					break;
 				}
-				movesLeft--;
+				this.setMovesLeft(this.getMovesLeft() - 1);
 				this.swapPlayer();
 				System.out.println();
 			}
@@ -224,16 +228,16 @@ public class TicTacToe{
 		game.setPlayers();
 		boolean wantToPlay = true;
 
-		while(true){
+		while(wantToPlay){
 			game.playGame();
 
 			System.out.println("Want to play again?(y for yes)");
 
-			Scanner in = new Scanner(System.in);
 			try{
-				char answer;
-				answer = (char)in.next();
-				if(answer != 'y'){
+				Scanner in = new Scanner(System.in);
+				String answer = new String();
+				answer = in.next();
+				if(answer != "yes"){
 					wantToPlay = false;
 				}
 			}
