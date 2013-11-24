@@ -4,12 +4,16 @@ public class Player{
 	private String name;
 	private int wins;
 	private int losses;
-	private float elo;
 	private boolean playerValue;
+	private float elo;
 
 	//Constructor takes in name and sets Wins, losses and elo to 0
-	public Player(){
-		
+	public Player(String name, boolean value){
+		this.setName(name);
+		this.setWins(0);
+		this.setLosses(0);
+		this.setPlayerValue(value);
+		this.setElo(0);
 	}
 
 	//returns the name of the current Player
