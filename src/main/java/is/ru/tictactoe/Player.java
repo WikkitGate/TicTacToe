@@ -9,9 +9,7 @@ public class Player{
 	public Player(String name, boolean value){
 		this.setName(name);
 		this.setWins(0);
-		this.setLosses(0);
 		this.setPlayerValue(value);
-		this.setElo(0);
 	}
 
 	//returns the name of the current Player
