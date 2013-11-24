@@ -8,6 +8,7 @@ public class PlayerTest
 {
 
 public class PlayerTest{
+	Player player;
 
 	@Test
 	public void constructorTest(){
