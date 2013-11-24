@@ -222,7 +222,7 @@ public class TicTacToe{
 	public static void main(String[] args){
 		TicTacToe game = new TicTacToe();
 		game.setPlayers();
-		//boolean wantToPlay = true;
+		boolean wantToPlay = true;
 
 		while(true){
 			game.playGame();
@@ -231,11 +231,11 @@ public class TicTacToe{
 
 			Scanner in = new Scanner(System.in);
 			try{
-				String answer = new String();
-				answer = in.next();
-				/*if(answer != "y "){
+				char answer;
+				answer = (char)in.next();
+				if(answer != 'y'){
 					wantToPlay = false;
-				}*/
+				}
 			}
 			catch(Exception e){
 				System.out.println(e.getMessage());
