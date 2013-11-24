@@ -23,7 +23,7 @@ public class TicTacToe{
 	}
 
 	//Gives this.players new values
-	protected void setPlayers(){
+	public void setPlayers(){
 		Player playerOne = new Player();
 		Player playerTwo = new Player();
 
@@ -50,6 +50,11 @@ public class TicTacToe{
 	//Sets the value of this.movesLeft to value
 	protected void resetMovesLeft(){
 		this.movesLeft = 9;
+	}
+
+	protected void resetTable(){
+		this.resetMovesLeft();
+		this.genTable();
 	}
 
 	//Returns this.table for viewing
@@ -179,7 +184,7 @@ public class TicTacToe{
 
 	//handles the basic gameplay of tictactoe
 	protected void playGame(){
-		this.setPlayers();
+		//this.setPlayers();
 
 		while(movesLeft > 0){
 			this.printTable();
@@ -209,14 +214,17 @@ public class TicTacToe{
 			System.out.println("We have a tie!");
 		}
 
+		this.resetTable();
+
 		this.printStatus();
 	}
 
 	public static void main(String[] args){
 		TicTacToe game = new TicTacToe();
-		boolean wantToPlay = true;
+		game.setPlayers();
+		//boolean wantToPlay = true;
 
-		while(wantToPlay){
+		while(true){
 			game.playGame();
 
 			System.out.println("Want to play again?(y for yes)");
@@ -225,9 +233,9 @@ public class TicTacToe{
 			try{
 				String answer = new String();
 				answer = in.next();
-				if(answer != "y"){
+				/*if(answer != "y "){
 					wantToPlay = false;
-				}
+				}*/
 			}
 			catch(Exception e){
 				System.out.println(e.getMessage());
