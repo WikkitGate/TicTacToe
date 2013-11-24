@@ -3,10 +3,6 @@ package is.ru.tictactoe;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
-
-public class PlayerTest
-{
-
 public class PlayerTest{
 	Player player;
 
@@ -17,7 +13,6 @@ public class PlayerTest{
 		assertEquals("player should be set to true and initialization", true, game.getPlayer());
 	}
 
-	
 	//	setName() and getName() tested together
 	@Test
 	public void nameTest(){
