@@ -56,9 +56,10 @@ public class TicTacToe{
 		this.setMovesLeft(9);
 	}
 
-	protected void resetTable(){
+	protected void resetGame(){
 		this.resetMovesLeft();
 		this.genTable();
+		this.setCurrentPlayer(1);
 	}
 
 	//Returns this.table for viewing
@@ -188,8 +189,6 @@ public class TicTacToe{
 
 	//handles the basic gameplay of tictactoe
 	protected void playGame(){
-		//this.setPlayers();
-
 		while(movesLeft > 0){
 			this.printTable();
 
@@ -217,10 +216,9 @@ public class TicTacToe{
 		if(movesLeft < 1){
 			System.out.println("We have a tie!");
 		}
-
-		this.resetTable();
-
+		this.printTable();
 		this.printStatus();
+		this.resetGame();
 	}
 
 	public static void main(String[] args){
